@@ -17,9 +17,14 @@
 
 # 🏆 Performance
 
+<div align="center">
+
+<img width="800" alt="chart" src="https://github.com/user-attachments/assets/2778c577-bc3f-4abf-bd53-e5a5f2ea60db" />
+
+</div>
 
 > [!Note]
-> - GIL deactivation of Python 3.13 seems to be less optimized than `pypy` or `cython` yet
+> - GIL deactivation of `Python 3.13` seems to be less optimized than `pypy` or `cython` yet
 
 # ✏️ Prepare
 1. Create Python 3.10, Python 3.13 environments with Anaconda and pyenv
