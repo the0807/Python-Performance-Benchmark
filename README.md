@@ -6,6 +6,9 @@
 
 </div>
 
+> [!Note]
+> - Benchmark code performs factual calculations
+
 # 🖥️ Environment
 <div align="center">
 
@@ -19,7 +22,7 @@
 
 <div align="center">
 
-<img width="800" alt="chart" src="https://github.com/user-attachments/assets/2778c577-bc3f-4abf-bd53-e5a5f2ea60db" />
+<img width="800" alt="chart" src="https://github.com/user-attachments/assets/7f079f17-cee2-4ccc-8f47-5445d6abb36f" />
 
 </div>
 

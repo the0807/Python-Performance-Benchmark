@@ -1,29 +1,49 @@
+import sys
 import time
-from concurrent.futures import ThreadPoolExecutor
+from threading import Thread
+from multiprocessing import Process
+import math
 
-# 0부터 1억까지의 모든 정수를 더한 값을 반환
-def compute(start, end):
-    total = 0
-    for i in range(start, end):
-        total += i
-    return total
+# 실행 시간 측정
+def time_taken(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.perf_counter()
+        result = func(*args, **kwargs)
+        end_time = time.perf_counter()
+        print(f"{func.__name__}: {end_time - start_time:.4f} seconds")
+        return result
+    return wrapper
 
-# 단일 스레드 테스트
-start = time.time()
-result = compute(0, 10**8)  # 범위를 1억으로 설정
-end = time.time()
+# 팩토리얼 계산
+def compute(num):
+    return math.factorial(num)
 
-print(f"Python Single Thread: {end - start:.4f} seconds")
+# 싱글 스레드
+@time_taken
+def single_thread(nums):
+    for num in nums:
+        compute(num)
 
-# 멀티 스레드 테스트
-start = time.time()
-with ThreadPoolExecutor(max_workers=4) as executor:
-    # 계산 범위를 4개로 나누어 각 스레드가 다른 범위에서 작업을 하도록 함
-    ranges = [(i * (10**8 // 4), (i + 1) * (10**8 // 4)) for i in range(4)]
-    results = list(executor.map(lambda r: compute(r[0], r[1]), ranges))
+# 멀티 스레드
+@time_taken
+def multi_thread(nums):
+    threads = [Thread(target=compute, args=(num,)) for num in nums]
+    for thread in threads: thread.start()
+    for thread in threads: thread.join()
 
-# 결과 합산
-total_result = sum(results)
-end = time.time()
+# 멀티 프로세싱
+@time_taken
+def multi_process(nums):
+    processes = [Process(target=compute, args=(num,)) for num in nums]
+    for process in processes: process.start()
+    for process in processes: process.join()
 
-print(f"Python Multi Thread: {end - start:.4f} seconds")
+def main():
+    nums = [200000] * 6
+
+    single_thread(nums)
+    multi_thread(nums)
+    multi_process(nums)
+
+if __name__ == "__main__":
+    main()
