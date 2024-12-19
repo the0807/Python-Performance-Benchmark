@@ -7,7 +7,7 @@
 </div>
 
 > [!Note]
-> - Benchmark code performs factual calculations
+> - Benchmark code performs factorial calculations
 
 # 🖥️ Environment
 <div align="center">
